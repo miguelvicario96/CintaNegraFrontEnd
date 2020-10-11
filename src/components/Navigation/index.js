@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext'
+import { AuthContext } from '../../context/AuthContext'; 
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -8,53 +9,57 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
 } from 'reactstrap';
 
-const Navigation = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const { name } = useContext(AuthContext);
+const Navigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { isAuth, user } = useContext(AuthContext);
 
-    const toggle = () => setIsOpen(!isOpen);
-  
+  const toggle = () => setIsOpen(!isOpen);
+
+  const publicNavbar = () => {
     return (
-        <Navbar color="light" light expand="md">
-            <NavbarBrand href="/">{ name }</NavbarBrand>
-            <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-                <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-                </NavItem>
-                <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                </NavItem>
-                <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                    Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                    <DropdownItem>
-                    Option 1
-                    </DropdownItem>
-                    <DropdownItem>
-                    Option 2
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>
-                    Reset
-                    </DropdownItem>
-                </DropdownMenu>
-                </UncontrolledDropdown>
-            </Nav>
-            <NavbarText>Simple Text</NavbarText>
-            </Collapse>
-        </Navbar>
-    );
+      <Navbar className="navbar navbar-dark bg-dark" expand="md">
+        <NavbarBrand tag={Link} to="/">Miguel App</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <NavLink tag={Link} to="/login">Login</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to="/signup">Signup</NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    )
+  } 
+
+  const authNavbar = () => {
+    return (
+      <Navbar className="navbar navbar-dark bg-dark" expand="md">
+        <NavbarBrand tag={Link} to="/">{`¡Bienvenid@ ${user.first_name}!`}</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <NavLink tag={Link} to="/logout">Logout</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to="/users">Usuarios</NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    )
+  }
+
+  return (
+    <React.Fragment>
+      { isAuth ? authNavbar() : publicNavbar() }
+    </React.Fragment>
+  );
 }
 
 export default Navigation;

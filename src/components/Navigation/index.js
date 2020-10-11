@@ -39,7 +39,7 @@ const Navigation = () => {
   const authNavbar = () => {
     return (
       <Navbar className="navbar navbar-dark bg-dark" expand="md">
-        <NavbarBrand tag={Link} to="/">{`¡Bienvenid@ ${user.first_name}!`}</NavbarBrand>
+        <NavbarBrand tag={Link} to="/">{`¡Bienvenid@!`}</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>

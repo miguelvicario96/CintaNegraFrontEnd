@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios'
 import {
   Button,  
@@ -28,11 +27,15 @@ const Signup = () => {
     const postURI = `${process.env.REACT_APP_BASE_URL}/signup`
     try {
       const res = await axios.post(postURI, jsonSend);
-      if (res.status === 201) alert("Successful Signup")
-      else alert("Error In Signup")
-      console.log(res.data);
+      if (res.status === 201) {
+        alert("Successful Signup");
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
+      }
     } catch (error) {
-      alert("Error In Signup")
+      alert("Error In Signup");
     }
     
   };

@@ -39,7 +39,7 @@ const Navigation = () => {
   const authNavbar = () => {
     return (
       <Navbar className="navbar navbar-dark bg-dark" expand="md">
-        <NavbarBrand tag={Link} to="/">{`¡Bienvenid@!`}</NavbarBrand>
+        <NavbarBrand tag={Link} to="/">{`¡Bienvenid@ ${user.first_name}!`}</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -47,7 +47,7 @@ const Navigation = () => {
               <NavLink tag={Link} to="/logout">Logout</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/users">Usuarios</NavLink>
+              <NavLink tag={Link} to="/posts">Posts</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

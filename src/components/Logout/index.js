@@ -3,10 +3,8 @@ import { AuthContext } from '../../context/AuthContext';
 import { Redirect } from 'react-router-dom';
 
 const Logout = () => {
-  const { setToken, setIsAuth  } = useContext(AuthContext);
-  setToken('');
-  setIsAuth(false);
-  localStorage.removeItem('token')
+  const { logoutUser  } = useContext(AuthContext);
+  logoutUser();
   alert('Successful Logout');
   return (
     <Redirect to="/login" />

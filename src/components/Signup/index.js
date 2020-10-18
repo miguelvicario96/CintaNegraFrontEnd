@@ -24,9 +24,9 @@ const Signup = () => {
       password,
     };
 
-    const postURI = `${process.env.REACT_APP_BASE_URL}/signup`
+    const signUpURI = `${process.env.REACT_APP_BASE_URL}/signup`
     try {
-      const res = await axios.post(postURI, jsonSend);
+      const res = await axios.post(signUpURI, jsonSend);
       if (res.status === 201) {
         alert("Successful Signup");
         setFirstName("");
